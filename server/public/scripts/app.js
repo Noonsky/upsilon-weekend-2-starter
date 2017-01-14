@@ -5,16 +5,25 @@ var currentIndex=0;
 var people=[];
 
     $(document).ready(function(){
+      $('#next').on('click', function(){
+        appendDom(people[++currentIndex])
+      });
+      $('#prev').on('click', function(){
+        appendDom(people[--currentIndex])
+      });
+
+
+
         $.ajax({
           type: "GET",
           url: "/data",
           success: function(response){
-            console.log(response);
+            console.log("This is the response", response);
             appendDom(response.person[0]);
             buildIndex(response.person.length);
-            var people=response.person;
-            createButtons();
-            // $('#next').on('click', appendDom(people[currentIndex++]));
+            people=response.person;
+            // createButtons();
+
           }
         });
     });
@@ -27,7 +36,7 @@ function appendDom(person) {
     $personDiv.append('<p>' + person.shoutout + '</p>');
 
 
-        $('#ajax-data').append($personDiv);
+        $('#ajax-data').html($personDiv);
     }
 
 function buildIndex(length){
@@ -37,11 +46,11 @@ function buildIndex(length){
   document.getElementById(currentIndex).style.backgroundColor="red";
 };
 
-
-function createButtons(a){
-a.append("<div class='buttons' id='next'>Next</div>"),
-a.append("<div class='buttons' id='prev'>Previous</div>")
-};
+//
+// function createButtons(a){
+// a.append("<div class='buttons' id='next'>Next</div>"),
+// a.append("<div class='buttons' id='prev'>Previous</div>")
+// };
 
 // $(function(){
 //
