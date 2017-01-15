@@ -49,7 +49,7 @@ function appendDom(person) {
 
 function buildIndex(length){
   for (var i=0; i<length;i++){
-    $('#indexContainer').append('<div class="indexBox" id=' +i+ '></div>')
+    $('#indexContainer').append('<div class="indexBoxes" id=' +i+ '></div>')
   }
   document.getElementById(currentIndex).style.backgroundColor="red";
 };
