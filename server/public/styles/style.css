@@ -26,19 +26,18 @@ body {
 .button {
   height: 100%;
   width: 75px;
-
 }
 
 #next {
   float: right;
   left: 100px;
-
+  margin-right: 25%;
 }
 
 #prev {
 float: left;
 right: 100px;
-
+margin-left: 25%;
 }
 
 .indexBoxes{
@@ -48,7 +47,6 @@ right: 100px;
   border-color: white;
   border-radius: 25px;
   display: inline-block;
-
 }
 
 #indexContainer{
