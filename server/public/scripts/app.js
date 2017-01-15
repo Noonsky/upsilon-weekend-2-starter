@@ -6,10 +6,19 @@ var people=[];
 
     $(document).ready(function(){
       $('#next').on('click', function(){
-        appendDom(people[++currentIndex])
+        document.getElementById(currentIndex).style.backgroundColor="black";
+        appendDom(people[++currentIndex]);
+        document.getElementById(currentIndex).style.backgroundColor="red";
+
       });
       $('#prev').on('click', function(){
+        document.getElementById(currentIndex).style.backgroundColor="black";
+        // if(currentIndex=0){
+        //   appendDom(response.person[16])}
+        // else{
+
         appendDom(people[--currentIndex])
+        document.getElementById(currentIndex).style.backgroundColor="red";
       });
 
 
@@ -22,7 +31,6 @@ var people=[];
             appendDom(response.person[0]);
             buildIndex(response.person.length);
             people=response.person;
-            // createButtons();
 
           }
         });
@@ -46,15 +54,6 @@ function buildIndex(length){
   document.getElementById(currentIndex).style.backgroundColor="red";
 };
 
-//
-// function createButtons(a){
-// a.append("<div class='buttons' id='next'>Next</div>"),
-// a.append("<div class='buttons' id='prev'>Previous</div>")
-// };
-
-// $(function(){
-//
-// });
 
 
 // currentIndex=currentIndex++;
