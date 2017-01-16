@@ -3,9 +3,7 @@ var people = [];
 
 $(document).ready(function() {
     $('#next').on('click', function() {
-        // $('#ajax-data').fadeOut('slow');
-          //fadeIn and fadeOut both hit at the same time after appendDom has been run. I couldn't figure out how to fix this.
-
+        $('#ajax-data').fadeOut('slow');
         document.getElementById(currentIndex).style.backgroundColor = "black";
         if (currentIndex == people.length - 1) {
             appendDom(people[0]);
@@ -14,10 +12,11 @@ $(document).ready(function() {
             appendDom(people[++currentIndex])
         };
         document.getElementById(currentIndex).style.backgroundColor = "red";
-        // $('#ajax-data').fadeIn('slow');
+        $('#ajax-data').fadeIn('slow');
 
     });
     $('#prev').on('click', function() {
+        $('#ajax-data').fadeOut('slow');
         document.getElementById(currentIndex).style.backgroundColor = "black";
         if (currentIndex == 0) {
             appendDom(people[(people.length - 1)]);
@@ -26,6 +25,7 @@ $(document).ready(function() {
             appendDom(people[--currentIndex])
         };
         document.getElementById(currentIndex).style.backgroundColor = "red";
+        $('#ajax-data').fadeIn('slow');
     });
 
     $.ajax({
@@ -42,13 +42,17 @@ $(document).ready(function() {
 });
 
 function appendDom(person) {
-    var $personDiv = $('<div class="person"></div>');
-    $personDiv.append('<h2>' + person.name + '</h2>');
-    $personDiv.append('<p>' + person.githubUserName + '</p>');
-    $personDiv.append('<p>' + person.shoutout + '</p>');
+    var timeout = setTimeout(function() {
+        var $personDiv = $('<div class="person"></div>');
+        $personDiv.append('<h2>' + person.name + '</h2>');
+        $personDiv.append('<p>' + person.githubUserName + '</p>');
+        $personDiv.append('<p>' + person.shoutout + '</p>');
 
-    $('#ajax-data').html($personDiv);
-}
+        $('#ajax-data').html($personDiv);
+    }, 500);
+};
+//fadeIn and fadeOut both hit at the same time after appendDom has been run.
+//I couldn't figure out how to fix this and had to resort to delaying the appendDom function.
 
 function buildIndex(length) {
     for (var i = 0; i < length; i++) {
@@ -56,15 +60,3 @@ function buildIndex(length) {
     }
     document.getElementById(currentIndex).style.backgroundColor = "red";
 };
-
-
-// 2 buttons (next and previous), a 17 index indicator, and timer
-//doc loads with array object 0 (17 objects in total, 0-16) displayed and index 0 (first index) lit
-
-//index items correspond to array object numbers, with lit index triggering display of corresponding object data
-
-//When 'next' is pressed div id="ajax-data" .appends DOM with info of next array object in order unless
-//it has hit the last object (object 16) in which case it will reset to 0
-
-//When 'back' is pressed div id="ajax-data" .appends DOM with info of previous array object in order unless
-//it has hit the first object (object 0) in which case it will set to 16
